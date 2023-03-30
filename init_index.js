@@ -17,12 +17,12 @@ process.argv.forEach(function (val, index, array) {
 
 var args = process.argv.slice(2);
 if (args.length > 1) { throw new Error('Pass only one argument, the wallet address') }
-const publicKey = args[0];
+const publicKey = args[0]
 
 //process.exit()
 
 // Create a new keypair
-const newPair = new Keypair(publicKey);
+const newPair = new Keypair();
 
 // Exact the public and private key from the keypair
 //const publicKey = new PublicKey(newPair._keypair.publicKey).toString();
@@ -41,9 +41,9 @@ const getWalletBalance = async () => {
         //console.log("Connection object is:", connection);
 
         // Make a wallet (keypair) from privateKey and get its balance
-        //const myWallet = await Keypair.fromSecretKey(privateKey);
+        const myWallet = await Keypair.fromSecretKey(privateKey);
         const walletBalance = await connection.getBalance(
-            new PublicKey(publicKey)
+            new PublicKey(newPair.publicKey)
         );
         console.log(`Wallet balance: ${parseInt(walletBalance) / LAMPORTS_PER_SOL} SOL`);
     } catch (err) {
@@ -55,12 +55,12 @@ const airDropSol = async () => {
     try {
         // Connect to the Devnet and make a wallet from privateKey
         const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-        //const myWallet = await Keypair.fromSecretKey(privateKey);
+        const myWallet = await Keypair.fromSecretKey(privateKey);
 
         // Request airdrop of 2 SOL to the wallet
-        console.log("Airdropping some SOL to my wallet!", publicKey);
+        console.log("Airdropping some SOL to my wallet!");
         const fromAirDropSignature = await connection.requestAirdrop(
-            new PublicKey(publicKey),
+            new PublicKey(myWallet.publicKey),
             2 * LAMPORTS_PER_SOL
         );
         await connection.confirmTransaction(fromAirDropSignature);
