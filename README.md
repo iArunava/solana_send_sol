@@ -6,5 +6,6 @@ Contains code for the Keypairs and Airdrops lesson from the Metacrafters beginne
 ```
 node index.js Ca1RLpgGpig5ZszaedRxYS2MSxfAKwHKhMEVGfGmSbeZ
 ```
+![airdropsol](images/airdropsol.png)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Metacrafters/Keypairs-and-Airdrops)
